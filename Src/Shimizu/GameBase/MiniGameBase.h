@@ -1,6 +1,6 @@
 #pragma once
 #include "DxLib.h"
-#include "../Common.h"
+#include "../../Common.h"
 #include "../Input/Input.h"
 
 #define _1Frame 60
