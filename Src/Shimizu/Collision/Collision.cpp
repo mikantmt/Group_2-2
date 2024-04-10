@@ -1,7 +1,7 @@
 #include "Collision.h"
 
 void Collision::Init() {
-
+	click_flag = false;
 }
 
 
@@ -90,6 +90,33 @@ bool Collision::RectToMousePointa(float X,float Y,float W,float H) {
 	if (X + W >= x && X <= x
 		&& Y + H >= y && Y <= y) {
 		return true;
+	}
+	else
+		return false;
+}
+
+bool Collision::IsClickOnRect(float X, float Y, float W, float H)
+{
+	//‹éŒ`‚Ì’†‚É‚ ‚é
+
+	if (RectToMousePointa(X,Y,W,H)) {
+		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)
+		{
+			//‰Ÿ‚³‚ê‚Ä‚¢‚é
+			if (click_flag == false)
+			{
+				//‰Ÿ‚³‚ê‚Â‚Ã‚¯‚Ä‚¢‚È‚¢
+				click_flag = true;
+				return true;
+			}
+			return false;
+		}
+		else
+		{
+			//‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢
+			click_flag = false;
+			return false;
+		}
 	}
 	else
 		return false;

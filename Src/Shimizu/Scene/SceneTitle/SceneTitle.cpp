@@ -1,7 +1,5 @@
 #include "SceneTitle.h"
 
-#define TITLE_PRESS_PATH		"Data/TitleImage/PressEnter.png"
-#define TITLE_BACKGROUND_PATH	"Data/TitleImage/TitleBackGround.png"
 
 // タイトル初期化
 void Title::InitTitle()
@@ -28,7 +26,7 @@ void Title::StepTitle()
 	}
 
 
-	if (IsKeyPush(KEY_INPUT_RETURN)){
+	if (collision.IsClickOnRect(0,0,100,100)){//範囲内でクリックしたら
 		g_CurrentSceneId = SCENE_ID_FIN_TITLE;
 	}
 }
@@ -36,7 +34,9 @@ void Title::StepTitle()
 // タイトル描画処理
 void Title::DrawTitle()
 {
-	DrawFormatString(0, 0, GetColor(255, 0, 0), "タイトル");
+	DrawBox(0, 0, 100, 100, GetColor(255, 0, 0), true);
+
+	DrawFormatString(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2, GetColor(255, 0, 0), "タイトル");
 }
 
 // タイトル終了処理

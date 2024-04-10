@@ -1,5 +1,7 @@
 #pragma once
 #include "../GameBase/MiniGameBase.h"
+#include "../Collision/Collision.h"
+#include "../Scene/Scene.h"
 
 const int TargetMax = 2;
 
@@ -17,15 +19,14 @@ private:
 
 	int   MarkType;		//打っていい的と打っては駄目な的
 
-	bool  click_flag;	//クリックしたかフラグ(初期値はfalse)
 	int MouseX, MouseY; //マウスの座標
 public:
+	Collision collision;
+
 	void Init();
 	void Play();
 	void Draw();
 	void Fin();
 
 	int  GetPoint(int count);//ポイント取得関数
-	bool IsClickOnRect();
-	bool RectToMousePointa();
 };

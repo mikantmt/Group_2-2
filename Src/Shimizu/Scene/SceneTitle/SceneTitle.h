@@ -2,7 +2,10 @@
 #include "../../Scene/Scene.h"
 
 class Title{
+private:
+
 public:
+	Collision collision;
 
 	//PressEnter“§‰ß•Ï”
 	int m_BlendAlpha = 255;

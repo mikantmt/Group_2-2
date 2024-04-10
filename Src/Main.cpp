@@ -29,7 +29,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		return -1;
 	}
 
-	SetMouseDispFlag(false);
+	SetMouseDispFlag(true);
 
 	// 画面サイズを変更
 	SetGraphMode(SCREEN_SIZE_X, SCREEN_SIZE_Y, 32);

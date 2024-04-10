@@ -11,12 +11,13 @@ void ShootDown::Init() {
 	AimHandle = LoadGraph("../Data/PlayScene/Aiming.png");
 	Limit = 0.0f;
 
+	IsFin = false;
+
 	MarkHandle[0] = LoadGraph("../Data/PlayScene/target/good.png");
 	MarkHandle[1] = LoadGraph("../Data/PlayScene/target/danger.png");
 
 	MarkType = ScopingRand(1, 5);
 
-	click_flag = false;
 	MouseX = 0;
 	MouseY = 0;
 }
@@ -29,13 +30,13 @@ void ShootDown::Play() {
 		Limit++;	//リミットのカウント開始
 		if (!IsFin) {
 			if (MarkType != 1) {
-				if (IsClickOnRect()) {//指定のキーが押されるたびにカウントをプラス
+				if (collision.IsClickOnRect(RectX,RectY, Height,Width)) {//指定のキーが押されるたびにカウントをプラス
 					IsHit = true;
 					count++;
 				}
 			}
 			else
-				if (IsClickOnRect()) {//打っちゃいけない的の処理
+				if (collision.IsClickOnRect(RectX, RectY, Height, Width)) {//打っちゃいけない的の処理
 					IsHit = true;
 					count--;
 				}
@@ -63,6 +64,12 @@ void ShootDown::Play() {
 		//ゲームの終了
 		IsFin = true;
 	}
+
+	if (IsFin) {
+		if (collision.IsClickOnRect(0, 0, 100, 100)) {
+			g_CurrentSceneId = SCENE_ID_FIN_PLAY;
+		}
+	}
 }
 
 void ShootDown::Draw() {
@@ -83,6 +90,10 @@ void ShootDown::Draw() {
 	//ポイント表示
 	DrawFormatString(0, 0, GetColor(0,0,0), "%d", GamePoint);
 	DrawFormatString(0, 16, GetColor(0, 0, 0), "%d", count);
+
+	if (IsFin) {
+		DrawBox(0, 0, 100, 100, GetColor(255, 0, 0), true);
+	}
 }
 
 void ShootDown::Fin() {
@@ -112,47 +123,5 @@ int ShootDown::GetPoint(int count) {
 	}
 
 	return point;
-}
-
-
-bool ShootDown::IsClickOnRect()
-{
-	//矩形の中にある
-	
-	if (RectToMousePointa()) {
-		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)
-		{
-			//押されている
-			if (click_flag == false)
-			{
-				//押されつづけていない
-				click_flag = true;
-				return true;
-			}
-			return false;
-		}
-		else
-		{
-			//押されていない
-			click_flag = false;
-			return false;
-		}
-	}
-	else
-		return false;
-}
-
-bool ShootDown::RectToMousePointa() {
-	int x = 0;
-	int y = 0;
-
-	GetMousePoint(&x, &y);
-	
-	if (RectX + Width >= x && RectX <= x
-		&& RectY + Height >= y && RectY <= y) {
-		return true;
-	}
-	else
-		return false;
 }
 

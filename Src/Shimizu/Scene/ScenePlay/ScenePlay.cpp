@@ -11,10 +11,6 @@ void Play::Init() {
 
 void Play::Step() {
 	shootdown.Play();
-
-	if (IsKeyPush(KEY_INPUT_RETURN)) {
-		g_CurrentSceneId = SCENE_ID_FIN_PLAY;
-	}
 }
 
 void Play::Draw() {

@@ -10,13 +10,15 @@ void Select::Init() {
 void Select::Step() {
 
 
-	if (IsKeyPush(KEY_INPUT_RETURN)) {
+	if (collision.IsClickOnRect(0, 0, 100, 100)) {
 		g_CurrentSceneId = SCENE_ID_FIN_SELECT;
 	}
 }
 
 void Select::Draw() {
-	DrawFormatString(0, 0, GetColor(255, 0, 0), "Select");
+	DrawBox(0, 0, 100, 100, GetColor(255, 0, 0), true);
+
+	DrawFormatString(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2, GetColor(255, 0, 0), "Select");
 }
 
 void Select::Fin()

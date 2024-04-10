@@ -5,6 +5,7 @@ class Result {
 private:
 
 public:
+	Collision collision;
 
 	void Init();
 	void Step();

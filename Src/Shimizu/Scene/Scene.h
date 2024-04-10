@@ -1,6 +1,8 @@
 #pragma once
 #include "DxLib.h"
+#include "../../Common.h"
 #include "../Input/Input.h"
+#include "../Collision/Collision.h"
 
 enum SCENE_ID
 {

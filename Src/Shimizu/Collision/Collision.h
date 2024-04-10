@@ -5,7 +5,7 @@
 
 class Collision {
 private:
-
+	bool click_flag;
 public:
 	void Init();
 	void Play();
@@ -27,6 +27,9 @@ public:
 	//矩形とマウスポインタの当たり判定
 	//引数(X座標,Y座標,幅,高さ)
 	bool RectToMousePointa(float X, float Y, float W, float H);
+
+	//矩形とクリック当たり判定
+	bool IsClickOnRect(float X, float Y, float W, float H);
 };
 
 #endif
