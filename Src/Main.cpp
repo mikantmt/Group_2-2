@@ -2,6 +2,11 @@
 
 #include "DxLib.h"	//DXライブラリのインクルード
 #include "../Src/Common.h"
+#include "../Src/Shimizu/Input/Input.h"
+#include "../Src/Shimizu/ShootDown/ShootDown.h"
+
+//クラスの宣言
+ShootDown shootdown;
 
 // Win32アプリケーションは WinMain関数 から始まる
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -9,10 +14,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//ウィンドウの状態を設定する
 	ChangeWindowMode(true);
 
+	//ウィンドウの背景色を設定
+	SetBackgroundColor(255, 255, 255);
+
 	//DXライブラリの初期化
 	if (DxLib_Init() == -1) {
 		return -1;
 	}
+
+	SetMouseDispFlag(false);
 
 	// 画面サイズを変更
 	SetGraphMode(SCREEN_SIZE_X, SCREEN_SIZE_Y, 32);
@@ -22,7 +32,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	
 	//-----------------------------------------
 	//一番最初に１回だけやる処理をここに書く
-
+	shootdown.Init();
 	//-----------------------------------------
 
 	//ゲームメインループ
@@ -40,7 +50,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		//-----------------------------------------
 		//ここからゲームの本体を書くことになる
 		//-----------------------------------------
+
+		StepInput();
+
 		
+		shootdown.Play();
+		shootdown.Draw();
 
 
 		//-----------------------------------------

@@ -8,7 +8,7 @@ void ShootDown::Init() {
 	count = 0;
 	RectX = ScopingRand(0, SCREEN_SIZE_X - Width);
 	RectY = ScopingRand(0, SCREEN_SIZE_Y - Height);
-	handle = LoadGraph("Data/MiniGame/Aiming.png");
+	handle = LoadGraph("../Data/PlayScene/Aiming.png");
 	Limit = 0.0f;
 
 	click_flag = false;
