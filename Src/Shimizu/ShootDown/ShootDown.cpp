@@ -33,8 +33,8 @@ void ShootDown::Play() {
 	//当たっている && リミット時間が過ぎている
 	if (IsHit || Limit >= 50) {
 		//ターゲットの座標更新
-		RectX = ScopingRand(0, 640 - Width);
-		RectY = ScopingRand(0, 480 - Height);
+		RectX = ScopingRand(0, SCREEN_SIZE_X - Width);
+		RectY = ScopingRand(0, SCREEN_SIZE_Y - Height);
 
 		//当たり判定のリセット
 		IsHit = false;
