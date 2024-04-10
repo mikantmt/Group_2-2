@@ -1,5 +1,5 @@
 #pragma once
-#include "../MiniGameBase/MiniGameBase.h"
+#include "../GameBase/MiniGameBase.h"
 
 const int TargetMax = 2;
 
