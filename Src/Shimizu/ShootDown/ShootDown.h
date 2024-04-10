@@ -11,8 +11,11 @@ private:
 	bool  IsHit;		//当たっているか
 	int	  count;		//撃ち落とした回数
 	int	  RectX, RectY; //矩形の座標
-	int	  handle;		//エイムの画像ハンドル
+	int	  AimHandle;	//エイムの画像ハンドル
+	int   MarkHandle[TargetMax];	//的の画像ハンドル
 	float Limit;	    //表示されてからクリックするまでの猶予
+
+	int   MarkType;		//打っていい的と打っては駄目な的
 
 	bool  click_flag;	//クリックしたかフラグ(初期値はfalse)
 	int MouseX, MouseY; //マウスの座標

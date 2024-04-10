@@ -8,8 +8,13 @@ void ShootDown::Init() {
 	count = 0;
 	RectX = ScopingRand(0, SCREEN_SIZE_X - Width);
 	RectY = ScopingRand(0, SCREEN_SIZE_Y - Height);
-	handle = LoadGraph("../Data/PlayScene/Aiming.png");
+	AimHandle = LoadGraph("../Data/PlayScene/Aiming.png");
 	Limit = 0.0f;
+
+	MarkHandle[0] = LoadGraph("../Data/PlayScene/target/good.png");
+	MarkHandle[1] = LoadGraph("../Data/PlayScene/target/danger.png");
+
+	MarkType = ScopingRand(1, 5);
 
 	click_flag = false;
 	MouseX = 0;
@@ -23,10 +28,17 @@ void ShootDown::Play() {
 		time--;		//制限時間のカウントダウンを開始
 		Limit++;	//リミットのカウント開始
 		if (!IsFin) {
-			if (IsClickOnRect()) {//指定のキーが押されるたびにカウントをプラス
-				IsHit = true;
-				count++;
+			if (MarkType != 1) {
+				if (IsClickOnRect()) {//指定のキーが押されるたびにカウントをプラス
+					IsHit = true;
+					count++;
+				}
 			}
+			else
+				if (IsClickOnRect()) {//打っちゃいけない的の処理
+					IsHit = true;
+					count--;
+				}
 		}
 	}
 
@@ -35,6 +47,8 @@ void ShootDown::Play() {
 		//ターゲットの座標更新
 		RectX = ScopingRand(0, SCREEN_SIZE_X - Width);
 		RectY = ScopingRand(0, SCREEN_SIZE_Y - Height);
+		//的の種類更新
+		MarkType = ScopingRand(1, 5);
 
 		//当たり判定のリセット
 		IsHit = false;
@@ -58,12 +72,17 @@ void ShootDown::Draw() {
 
 	if (Startlimit <= 0 && time >= 0.0f) {
 		//ターゲット表示
-		DrawBox(RectX, RectY, RectX + Width, RectY + Height, GetColor(0,0,0), true);
+		if (MarkType != 1) {
+			DrawGraph(RectX, RectY, MarkHandle[0], true);
+		}
+		else
+			DrawGraph(RectX, RectY, MarkHandle[1], true);
 	}
 	//エイミングの画像
-	DrawRotaGraph(MouseX, MouseY, 1.0f, 0.0f, handle, true);
+	DrawRotaGraph(MouseX, MouseY, 1.0f, 0.0f, AimHandle, true);
 	//ポイント表示
 	DrawFormatString(0, 0, GetColor(0,0,0), "%d", GamePoint);
+	DrawFormatString(0, 16, GetColor(0, 0, 0), "%d", count);
 }
 
 void ShootDown::Fin() {
@@ -129,13 +148,11 @@ bool ShootDown::RectToMousePointa() {
 
 	GetMousePoint(&x, &y);
 	
-	for (int i = 0; i < TargetMax; i++) {
-		if (RectX + Width >= x && RectX <= x
-			&& RectY + Height >= y && RectY <= y) {
-			return true;
-		}
-		else
-			return false;
+	if (RectX + Width >= x && RectX <= x
+		&& RectY + Height >= y && RectY <= y) {
+		return true;
 	}
+	else
+		return false;
 }
 

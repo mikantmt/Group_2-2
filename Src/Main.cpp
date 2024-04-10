@@ -2,11 +2,18 @@
 
 #include "DxLib.h"	//DXライブラリのインクルード
 #include "../Src/Common.h"
+#include "../Src/Shimizu/Scene/SceneTitle/SceneTitle.h"
+#include "../Src/Shimizu/Scene/SceneSelect/SceneSelect.h"
+#include "../Src/Shimizu/Scene/ScenePlay/ScenePlay.h"
+#include "../Src/Shimizu/Scene/SceneResult/SceneResult.h"
+
 #include "../Src/Shimizu/Input/Input.h"
 #include "../Src/Shimizu/ShootDown/ShootDown.h"
 
-//クラスの宣言
-ShootDown shootdown;
+
+
+SCENE_ID g_CurrentSceneId = SCENE_ID_INIT_TITLE;
+
 
 // Win32アプリケーションは WinMain関数 から始まる
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -32,7 +39,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	
 	//-----------------------------------------
 	//一番最初に１回だけやる処理をここに書く
-	shootdown.Init();
+	//クラスの宣言
+	Title	title;
+	Select  select;
+	Play	play;
+	Result	result;
 	//-----------------------------------------
 
 	//ゲームメインループ
@@ -47,15 +58,84 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		//画面に表示されたものを初期化
 		ClearDrawScreen();
 
+		StepInput();
+
+		switch (g_CurrentSceneId)
+		{
+
+		case SCENE_ID_INIT_TITLE:
+
+			title.InitTitle();
+
+			break;
+		case SCENE_ID_LOOP_TITLE:
+
+			title.StepTitle();
+			title.DrawTitle();
+
+			break;
+		case SCENE_ID_FIN_TITLE:
+
+			title.FinTitle();
+
+			break;
+
+		case SCENE_ID_INIT_SELECT:
+
+			select.Init();
+
+			break;
+		case SCENE_ID_LOOP_SELECT:
+
+			select.Step();
+			select.Draw();
+
+			break;
+		case SCENE_ID_FIN_SELECT:
+
+			select.Fin();
+
+			break;
+
+		case SCENE_ID_INIT_PLAY:
+
+			play.Init();
+
+			break;
+		case SCENE_ID_LOOP_PLAY:
+
+			play.Step();
+			play.Draw();
+
+			break;
+		case SCENE_ID_FIN_PLAY:
+
+			play.Fin();
+
+			break;
+		case SCENE_ID_INIT_RESULT:
+
+			result.Init();
+
+			break;
+		case SCENE_ID_LOOP_RESULT:
+
+			result.Step();
+			result.Draw();
+
+			break;
+		case SCENE_ID_FIN_RESULT:
+
+			result.Fin();
+
+			break;
+		default:
+			break;
+		}
+
 		//-----------------------------------------
 		//ここからゲームの本体を書くことになる
 		//-----------------------------------------
-
-		StepInput();
-
-		
-		shootdown.Play();
-		shootdown.Draw();
 
 
 		//-----------------------------------------
