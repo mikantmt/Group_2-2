@@ -2,6 +2,7 @@
 #include "../GameBase/MiniGameBase.h"
 #include "../Collision/Collision.h"
 #include "../Scene/Scene.h"
+#include "../Scene/SceneSelect/SceneSelect.h"
 
 const int TargetMax = 2;
 

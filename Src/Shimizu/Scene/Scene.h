@@ -29,3 +29,5 @@ enum SCENE_ID
 
 //@Œ»İ‚ÌƒV[ƒ“ID
 extern SCENE_ID g_CurrentSceneId;
+
+extern int GameMode;
