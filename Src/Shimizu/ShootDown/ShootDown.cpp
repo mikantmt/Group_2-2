@@ -1,6 +1,5 @@
 #include "ShootDown.h"
-
-#define LIMIT 60
+ 
 void ShootDown::Init() {
 	MiniGameBase::Init();
 	SetMousePoint(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2);
@@ -54,7 +53,7 @@ void ShootDown::Play() {
 	}
 
 	//当たっている && リミット時間が過ぎている
-	if (IsHit || Limit > LIMIT) {
+	if (IsHit || Limit > LimitChange) {
 		//ターゲットの座標更新
 		RectX = ScopingRand(0, SCREEN_SIZE_X - Width);
 		RectY = ScopingRand(0, SCREEN_SIZE_Y - Height);
@@ -81,13 +80,8 @@ void ShootDown::Play() {
 	}
 
 	if (GameMode == 3) {//ゲームモード3は失敗したら終了
-		if (Limit >= LIMIT) {
+		if (Limit >= LimitChange) {
 			IsFin = true;
-		}
-		if (MarkType == 1) {
-			if (collision.IsClickOnRect(RectX, RectY, Height, Width)) {
-				IsFin = true;
-			}
 		}
 	}
 

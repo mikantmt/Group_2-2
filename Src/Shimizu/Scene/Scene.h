@@ -30,4 +30,7 @@ enum SCENE_ID
 //　現在のシーンID
 extern SCENE_ID g_CurrentSceneId;
 
+//ゲームモード変更用
 extern int GameMode;
+//的の出現タイム変更用
+extern int LimitChange;

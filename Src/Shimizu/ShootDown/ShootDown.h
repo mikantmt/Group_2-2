@@ -20,7 +20,7 @@ private:
 
 	int   MarkType;		//打っていい的と打っては駄目な的
 
-	int MouseX, MouseY; //マウスの座標
+	int	MouseX, MouseY; //マウスの座標
 public:
 	Collision collision;
 
