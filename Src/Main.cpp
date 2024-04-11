@@ -19,7 +19,7 @@ int GameMode = 0;
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	//ウィンドウの状態を設定する
-	ChangeWindowMode(true);
+	ChangeWindowMode(false);
 
 	//ウィンドウの背景色を設定
 	SetBackgroundColor(255, 255, 255);
