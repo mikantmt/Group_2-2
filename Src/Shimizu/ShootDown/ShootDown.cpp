@@ -2,6 +2,8 @@
 
 #define LIMIT 60
 void ShootDown::Init() {
+	MiniGameBase::Init();
+	SetMousePoint(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2);
 	Startlimit = 210.0f;//開始まで3秒+START表示の猶予(0.5秒)
 
 	time = 600.0f;	//10秒
@@ -11,9 +13,6 @@ void ShootDown::Init() {
 	RectY = ScopingRand(0, SCREEN_SIZE_Y - Height);
 	AimHandle = LoadGraph("../Data/PlayScene/Aiming.png");
 	Limit = 0.0f;
-	GamePoint = 0;
-
-	IsFin = false;
 
 	MarkHandle[0] = LoadGraph("../Data/PlayScene/target/good.png");
 	MarkHandle[1] = LoadGraph("../Data/PlayScene/target/danger.png");
@@ -31,6 +30,7 @@ void ShootDown::Init() {
 }
 
 void ShootDown::Play() {
+
 	Startlimit--;//スタートまでのカウントダウン
 
 	if (Startlimit <= 0) {//カウントダウンが0以下であれば]
@@ -113,8 +113,6 @@ void ShootDown::Draw() {
 				DrawGraph(RectX, RectY, MarkHandle[1], true);
 		}
 	}
-	//エイミングの画像
-	DrawRotaGraph(MouseX, MouseY, 1.0f, 0.0f, AimHandle, true);
 	//ポイント表示
 	DrawFormatString(0, 0, GetColor(0,0,0), "%d", GamePoint);
 	DrawFormatString(0, 16, GetColor(0, 0, 0), "%d", count);
@@ -124,6 +122,9 @@ void ShootDown::Draw() {
 	}
 
 	DrawFormatString(0, 200, GetColor(0, 0, 0), "%d", GameMode);
+
+	//エイミングの画像
+	DrawRotaGraph(MouseX, MouseY, 1.0f, 0.0f, AimHandle, true);
 }
 
 void ShootDown::Fin() {

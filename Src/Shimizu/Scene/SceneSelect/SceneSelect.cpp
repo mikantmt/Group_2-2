@@ -1,8 +1,7 @@
 #include "../../Scene/SceneSelect/SceneSelect.h"
 
 void Select::Init() {
-
-
+	AimHandle = LoadGraph("../Data/PlayScene/Aiming.png");
 	// タイトルのループ処理へ遷移
 	g_CurrentSceneId = SCENE_ID_LOOP_SELECT;
 }
@@ -33,6 +32,10 @@ void Select::Draw() {
 	DrawBox(200, 0, 300, 100, GetColor(0, 0, 255), true);
 
 	DrawFormatString(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2, GetColor(255, 0, 0), "Select");
+
+	GetMousePoint(&MouseX, &MouseY);//マウスポイントの座標取得
+	//エイミングの画像
+	DrawRotaGraph(MouseX, MouseY, 1.0f, 0.0f, AimHandle, true);
 }
 
 void Select::Fin()

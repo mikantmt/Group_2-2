@@ -4,6 +4,7 @@
 // タイトル初期化
 void Title::InitTitle()
 {
+	AimHandle = LoadGraph("../Data/PlayScene/Aiming.png");
 	// タイトルのループ処理へ遷移
 	g_CurrentSceneId = SCENE_ID_LOOP_TITLE;
 }
@@ -34,9 +35,14 @@ void Title::StepTitle()
 // タイトル描画処理
 void Title::DrawTitle()
 {
+	GetMousePoint(&MouseX, &MouseY);//マウスポイントの座標取得
+
 	DrawBox(0, 0, 100, 100, GetColor(255, 0, 0), true);
 
 	DrawFormatString(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2, GetColor(255, 0, 0), "タイトル");
+
+	//エイミングの画像
+	DrawRotaGraph(MouseX, MouseY, 1.0f, 0.0f, AimHandle, true);
 }
 
 // タイトル終了処理

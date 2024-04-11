@@ -54,6 +54,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			//エスケープキーが押されたら終了
 			break;
 		}
+		SetMouseDispFlag(false);
 
 		//画面に表示されたものを初期化
 		ClearDrawScreen();

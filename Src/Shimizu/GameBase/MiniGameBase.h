@@ -4,6 +4,7 @@
 #include "../Input/Input.h"
 
 #define _1Frame 60
+#define COUNT_NUM 4
 
 const int LimitTime = 210.0f;
 
@@ -13,6 +14,7 @@ protected:
 	bool  IsClear;					//ゲームクリアフラグ(初期値はfalse)
 	float Startlimit;				//開始までのカウントダウン
 	int   GamePoint;				//そのゲームの得点
+	int	  Handle[COUNT_NUM];		//カウントダウン画像
 
 	void  CountDown(float limit);	//カウントダウンの関数(210を固定)
 
