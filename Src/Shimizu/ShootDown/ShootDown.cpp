@@ -1,5 +1,6 @@
 #include "ShootDown.h"
 
+#define LIMIT 60
 void ShootDown::Init() {
 	Startlimit = 210.0f;//開始まで3秒+START表示の猶予(0.5秒)
 
@@ -18,10 +19,10 @@ void ShootDown::Init() {
 	MarkHandle[1] = LoadGraph("../Data/PlayScene/target/danger.png");
 
 	//ゲームモードによって表示する的の種類を変える
-	if (GameMode == 1) {//打っていい的だけ
+	if (GameMode != 2) {//打っていい的だけ
 		MarkType = ScopingRand(2, 5);
 	}
-	else if (GameMode != 1) {//打ってはいけない的もある
+	else if (GameMode == 2) {//打ってはいけない的もある
 		MarkType = ScopingRand(1, 5);
 	}
 
@@ -53,12 +54,12 @@ void ShootDown::Play() {
 	}
 
 	//当たっている && リミット時間が過ぎている
-	if (IsHit || Limit >= 50) {
+	if (IsHit || Limit > LIMIT) {
 		//ターゲットの座標更新
 		RectX = ScopingRand(0, SCREEN_SIZE_X - Width);
 		RectY = ScopingRand(0, SCREEN_SIZE_Y - Height);
 		//的の種類更新
-		if (GameMode == 1) {
+		if (GameMode != 2) {
 			MarkType = ScopingRand(2, 5);
 		}
 		else if (GameMode == 2) {
@@ -69,9 +70,7 @@ void ShootDown::Play() {
 		IsHit = false;
 
 		//リミットのリセット
-		if (GameMode != 3) {
-			Limit = 0.0f;
-		}
+		Limit = 0.0f;
 	}
 
 
@@ -82,8 +81,13 @@ void ShootDown::Play() {
 	}
 
 	if (GameMode == 3) {//ゲームモード3は失敗したら終了
-		if (Limit >= 50) {
+		if (Limit >= LIMIT) {
 			IsFin = true;
+		}
+		if (MarkType == 1) {
+			if (collision.IsClickOnRect(RectX, RectY, Height, Width)) {
+				IsFin = true;
+			}
 		}
 	}
 
@@ -101,11 +105,13 @@ void ShootDown::Draw() {
 
 	if (Startlimit <= 0 && time >= 0.0f) {
 		//ターゲット表示
-		if (MarkType != 1) {
-			DrawGraph(RectX, RectY, MarkHandle[0], true);
+		if (!IsFin) {
+			if (MarkType != 1) {
+				DrawGraph(RectX, RectY, MarkHandle[0], true);
+			}
+			else
+				DrawGraph(RectX, RectY, MarkHandle[1], true);
 		}
-		else
-			DrawGraph(RectX, RectY, MarkHandle[1], true);
 	}
 	//エイミングの画像
 	DrawRotaGraph(MouseX, MouseY, 1.0f, 0.0f, AimHandle, true);
