@@ -8,14 +8,14 @@ void ShootDown::Init() {
 	count = 0;
 	RectX = ScopingRand(0, SCREEN_SIZE_X - Width);
 	RectY = ScopingRand(0, SCREEN_SIZE_Y - Height);
-	AimHandle = LoadGraph("Data/PlayScene/Aiming.png");
+	AimHandle = LoadGraph("../Data/PlayScene/Aiming.png");
 	Limit = 0.0f;
 	GamePoint = 0;
 
 	IsFin = false;
 
-	MarkHandle[0] = LoadGraph("Data/PlayScene/target/good.png");
-	MarkHandle[1] = LoadGraph("Data/PlayScene/target/danger.png");
+	MarkHandle[0] = LoadGraph("../Data/PlayScene/target/good.png");
+	MarkHandle[1] = LoadGraph("../Data/PlayScene/target/danger.png");
 
 	//ゲームモードによって表示する的の種類を変える
 	if (GameMode == 1) {//打っていい的だけ

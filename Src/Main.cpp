@@ -10,9 +10,9 @@
 #include "../Src/Shimizu/Input/Input.h"
 #include "../Src/Shimizu/ShootDown/ShootDown.h"
 
-
-
 SCENE_ID g_CurrentSceneId = SCENE_ID_INIT_TITLE;
+
+int GameMode = 0;
 
 
 // Win32アプリケーションは WinMain関数 から始まる
