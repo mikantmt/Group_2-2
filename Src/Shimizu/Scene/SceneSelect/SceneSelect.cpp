@@ -5,6 +5,9 @@ void Select::Init() {
 
 	ArrowHandle[0] = LoadGraph("../Data/SelectScene/LeftArrow.png");
 	ArrowHandle[1] = LoadGraph("../Data/SelectScene/RightArrow.png");
+
+	number.Init();
+
 	// タイトルのループ処理へ遷移
 	g_CurrentSceneId = SCENE_ID_LOOP_SELECT;
 }
@@ -37,6 +40,12 @@ void Select::Step() {
 	if (LimitChange < 0) {
 		LimitChange = 0;
 	}
+
+	if (number.Digit_3 == 0) {//二桁の時の座標と
+		number.SetPos(SCREEN_SIZE_X - 64, SCREEN_SIZE_Y - 48);
+	}
+	else					  //三桁の時の座標と
+		number.SetPos(SCREEN_SIZE_X - 56, SCREEN_SIZE_Y - 48);
 }
 
 void Select::Draw() {
@@ -52,8 +61,7 @@ void Select::Draw() {
 	DrawGraph(SCREEN_SIZE_X - 132, SCREEN_SIZE_Y - 64, ArrowHandle[0], true);
 	DrawGraph(SCREEN_SIZE_X - 32, SCREEN_SIZE_Y - 64, ArrowHandle[1], true);
 
-	DrawFormatString(SCREEN_SIZE_X - 74, SCREEN_SIZE_Y - 40, GetColor(255, 0, 0), "%d", LimitChange);
-
+	number.DrawFont(LimitChange);
 
 	GetMousePoint(&MouseX, &MouseY);//マウスポイントの座標取得
 	//エイミングの画像
