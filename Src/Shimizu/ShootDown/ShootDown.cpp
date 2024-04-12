@@ -13,8 +13,8 @@ void ShootDown::Init() {
 	AimHandle = LoadGraph("../Data/PlayScene/Aiming.png");
 	Limit = 0.0f;
 
-	MarkHandle[0] = LoadGraph("../Data/PlayScene/target/good.png");
-	MarkHandle[1] = LoadGraph("../Data/PlayScene/target/danger.png");
+	MarkHandle[0] = LoadGraph("../Data/PlayScene/target/good2.png");
+	MarkHandle[1] = LoadGraph("../Data/PlayScene/target/danger3.png");
 
 	//ゲームモードによって表示する的の種類を変える
 	if (GameMode != 2) {//打っていい的だけ
