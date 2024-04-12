@@ -29,10 +29,13 @@ void Select::Step() {
 
 	//èoåªë¨ìxïœçX
 	if (collision.IsClickOnRect(SCREEN_SIZE_X - 132, SCREEN_SIZE_Y - 64, 32, 64)) {
-		LimitChange--;
+		LimitChange -= 5;
 	}
 	if (collision.IsClickOnRect(SCREEN_SIZE_X - 32, SCREEN_SIZE_Y - 64, 32, 64)) {
-		LimitChange++;
+		LimitChange += 5;
+	}
+	if (LimitChange < 0) {
+		LimitChange = 0;
 	}
 }
 
