@@ -19,6 +19,7 @@ private:
 	float Limit;	    //表示されてからクリックするまでの猶予
 
 	int   MarkType;		//打っていい的と打っては駄目な的
+	int   BeforeMarkType;
 
 	int	MouseX, MouseY; //マウスの座標
 public:

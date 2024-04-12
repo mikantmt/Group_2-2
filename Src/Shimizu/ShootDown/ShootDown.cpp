@@ -18,7 +18,7 @@ void ShootDown::Init() {
 
 	//ゲームモードによって表示する的の種類を変える
 	if (GameMode != 2) {//打っていい的だけ
-		MarkType = ScopingRand(2, 5);
+		MarkType = 2;
 	}
 	else if (GameMode == 2) {//打ってはいけない的もある
 		MarkType = ScopingRand(1, 5);
@@ -32,8 +32,8 @@ void ShootDown::Play() {
 
 	Startlimit--;//スタートまでのカウントダウン
 
-	if (Startlimit <= 0) {//カウントダウンが0以下であれば]
-		if (GameMode != 3) {
+	if (Startlimit <= 0) {
+		if (GameMode != 3) {//ゲームモード3は制限時間なし
 			time--;		//制限時間のカウントダウンを開始
 		}
 		Limit++;	//リミットのカウント開始
@@ -59,7 +59,7 @@ void ShootDown::Play() {
 		RectY = ScopingRand(0, SCREEN_SIZE_Y - Height);
 		//的の種類更新
 		if (GameMode != 2) {
-			MarkType = ScopingRand(2, 5);
+			MarkType = 2;
 		}
 		else if (GameMode == 2) {
 			MarkType = ScopingRand(1, 5);
