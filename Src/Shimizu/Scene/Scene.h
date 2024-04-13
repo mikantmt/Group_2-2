@@ -34,3 +34,5 @@ extern SCENE_ID g_CurrentSceneId;
 extern int GameMode;
 //的の出現タイム変更用
 extern int LimitChange;
+//得点保存用
+extern int CountPoint;

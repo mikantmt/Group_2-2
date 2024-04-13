@@ -49,6 +49,9 @@ void Title::DrawTitle()
 // タイトル終了処理
 void Title::FinTitle()
 {
+	DeleteGraph(Handle);
+	DeleteGraph(Click);
+	DeleteGraph(AimHandle);
 	// プレイシーンに遷移
 	g_CurrentSceneId = SCENE_ID_INIT_SELECT;
 }

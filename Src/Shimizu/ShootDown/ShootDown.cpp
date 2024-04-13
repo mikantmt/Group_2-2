@@ -4,10 +4,9 @@ void ShootDown::Init() {
 	MiniGameBase::Init();
 	SetMousePoint(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2);
 	Startlimit = 210.0f;//開始まで3秒+START表示の猶予(0.5秒)
-
+	CountPoint = 0;
 	time = 600.0f;	//10秒
 	IsHit = false;
-	count = 0;
 	RectX = ScopingRand(0, SCREEN_SIZE_X - Width);
 	RectY = ScopingRand(0, SCREEN_SIZE_Y - Height);
 	AimHandle = LoadGraph("../Data/PlayScene/Aiming.png");
@@ -44,13 +43,13 @@ void ShootDown::Play() {
 			if (MarkType != 1) {
 				if (collision.IsClickOnRect(RectX,RectY, Height,Width)) {//指定のキーが押されるたびにカウントをプラス
 					IsHit = true;
-					count++;
+					CountPoint++;
 				}
 			}
 			else
 				if (collision.IsClickOnRect(RectX, RectY, Height, Width)) {//打っちゃいけない的の処理
 					IsHit = true;
-					count--;
+					CountPoint--;
 				}
 		}
 	}
@@ -77,7 +76,6 @@ void ShootDown::Play() {
 
 
 	if (time <= 0.0f) {//タイムオーバーで終了
-		GamePoint = GetPoint(count);//ポイントの取得
 		//ゲームの終了
 		IsFin = true;
 	}
@@ -110,47 +108,26 @@ void ShootDown::Draw() {
 				DrawGraph(RectX, RectY, MarkHandle[1], true);
 		}
 	}
-	//ポイント表示
-	DrawFormatString(0, 0, GetColor(0,0,0), "%d", GamePoint);
-	DrawFormatString(0, 16, GetColor(0, 0, 0), "%d", count);
 
 	if (IsFin) {
 		DrawGraph(SCREEN_SIZE_X / 2 - 150, SCREEN_SIZE_Y / 2 - 150, FinHandle, true);
 		DrawGraph(SCREEN_SIZE_X - 150, SCREEN_SIZE_Y - 150, NextHandle, true);
 	}
 
-	DrawFormatString(0, 200, GetColor(0, 0, 0), "%d", GameMode);
+	/*DrawFormatString(0, 200, GetColor(0, 0, 0), "%d", GameMode);*/
 
 	//エイミングの画像
 	DrawRotaGraph(MouseX, MouseY, 1.0f, 0.0f, AimHandle, true);
 }
 
 void ShootDown::Fin() {
-	/*DeleteGraph();*/
-}
+	DeleteGraph(AimHandle);
+	DeleteGraph(FinHandle);
+	DeleteGraph(NextHandle);
 
-int ShootDown::GetPoint(int count) {
-	int point = 0;
-
-	if (count >= 20) {
-		point = 100;
+	MiniGameBase::Fin();
+	for (int i = 0; i < TargetMax; i++) {
+		DeleteGraph(MarkHandle[i]);
 	}
-	if (count < 20 && count >= 15) {
-		point = 75;
-	}
-	if (count < 15 && count >= 10) {
-		point = 50;
-	}
-	if (count < 10 && count >= 5) {
-		point = 25;
-	}
-	if (count < 5 && count >= 1) {
-		point = 10;
-	}
-	if (count <= 0) {
-		point = 0;
-	}
-
-	return point;
 }
 

@@ -1,5 +1,7 @@
 #pragma once
 #include "../../Scene/Scene.h"
+#include "../../Number/Number.h"
+#include "../../ShootDown/ShootDown.h"
 
 class Result {
 private:
@@ -9,6 +11,8 @@ private:
 	int MouseX, MouseY; //マウスの座標
 public:
 	Collision collision;
+	Number	  number;
+	ShootDown shootdown;
 
 	void Init();
 	void Step();

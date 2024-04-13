@@ -10,7 +10,7 @@ void Select::Init() {
 	ArrowHandle[0] = LoadGraph("../Data/SelectScene/LeftArrow.png");
 	ArrowHandle[1] = LoadGraph("../Data/SelectScene/RightArrow.png");
 
-	number.Init();
+	number.Init(0,16,32);
 
 	// タイトルのループ処理へ遷移
 	g_CurrentSceneId = SCENE_ID_LOOP_SELECT;
@@ -55,7 +55,7 @@ void Select::Draw() {
 	DrawGraph(0, SCREEN_SIZE_Y - 64, ArrowHandle[0], true);
 	DrawGraph(96, SCREEN_SIZE_Y - 64, ArrowHandle[1], true);
 
-	number.DrawFont(LimitChange);
+	number.DrawFont(LimitChange,16);
 
 	GetMousePoint(&MouseX, &MouseY);//マウスポイントの座標取得
 	//エイミングの画像
@@ -64,6 +64,16 @@ void Select::Draw() {
 
 void Select::Fin()
 {
+	DeleteGraph(AimHandle);
+	for (int i = 0; i < Lebel_Max_Num; i++) {
+		DeleteGraph(LevelHandle[i]);
+	}
+	for (int i = 0; i < 2; i++) {
+		DeleteGraph(ArrowHandle[i]);
+	}
+
+	number.Fin();
+
 	// プレイシーンに遷移
 	g_CurrentSceneId = SCENE_ID_INIT_PLAY;
 }

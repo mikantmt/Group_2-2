@@ -12,7 +12,6 @@ class ShootDown : public MiniGameBase {
 private:
 	float time;			//制限時間(10秒くらい)
 	bool  IsHit;		//当たっているか
-	int	  count;		//撃ち落とした回数
 	int	  RectX, RectY; //矩形の座標
 	int	  AimHandle;	//エイムの画像ハンドル
 	int   MarkHandle[TargetMax];	//的の画像ハンドル
@@ -31,6 +30,4 @@ public:
 	void Play();
 	void Draw();
 	void Fin();
-
-	int  GetPoint(int count);//ポイント取得関数
 };

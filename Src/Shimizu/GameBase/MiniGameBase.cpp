@@ -19,7 +19,9 @@ void MiniGameBase::Draw() {
 }
 
 void MiniGameBase::Fin() {
-
+	for (int i = 0; i < COUNT_NUM; i++) {
+		DeleteGraph(Handle[i]);
+	}
 }
 
 void MiniGameBase::CountDown(float limit) {
