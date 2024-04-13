@@ -22,9 +22,15 @@ private:
 	int   MarkType;		//打っていい的と打っては駄目な的
 	int   BeforeMarkType;
 
+	int ClickSound;
+	int MissSound;
+	int TrueSound;
+	int PlayBGM;
+
 	int	MouseX, MouseY; //マウスの座標
 public:
 	Collision collision;
+	Scene scene;
 
 	void Init();
 	void Play();

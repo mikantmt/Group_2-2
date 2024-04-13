@@ -4,6 +4,21 @@
 #include "../Input/Input.h"
 #include "../Collision/Collision.h"
 
+class Scene {
+	public:
+		int ClickSound;
+		int GameBGM;
+
+		void Init() {
+			ClickSound = LoadSoundMem("../Sound/Click.mp3");
+			GameBGM = LoadSoundMem("../Sound/GameBGM.mp3");
+		}
+
+		void Fin() {
+			DeleteSoundMem(GameBGM);
+		}
+};
+
 enum SCENE_ID
 {
 	// タイトルシーンのID

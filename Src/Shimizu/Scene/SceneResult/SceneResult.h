@@ -3,7 +3,7 @@
 #include "../../Number/Number.h"
 #include "../../ShootDown/ShootDown.h"
 
-class Result {
+class Result : public Scene {
 private:
 	int Handle;			//背景画像
 	int	AimHandle;		//エイムの画像ハンドル

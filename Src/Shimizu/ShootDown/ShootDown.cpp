@@ -9,14 +9,22 @@ void ShootDown::Init() {
 	IsHit = false;
 	RectX = ScopingRand(0, SCREEN_SIZE_X - Width);
 	RectY = ScopingRand(0, SCREEN_SIZE_Y - Height);
-	AimHandle = LoadGraph("../Data/PlayScene/Aiming.png");
 	Limit = 0.0f;
 
+	//画像読込
+	AimHandle = LoadGraph("../Data/PlayScene/Aiming.png");
 	MarkHandle[0] = LoadGraph("../Data/PlayScene/target/good2.png");
 	MarkHandle[1] = LoadGraph("../Data/PlayScene/target/danger3.png");
-
 	FinHandle = LoadGraph("../Data/PlayScene/Finish/Finish.png");
 	NextHandle = LoadGraph("../Data/PlayScene/Finish/Next.png");
+
+	//サウンド読込
+	ClickSound = LoadSoundMem("../Sound/Click.mp3");
+	MissSound = LoadSoundMem("../Sound/Miss.mp3");
+	TrueSound = LoadSoundMem("../Sound/True.mp3");
+	PlayBGM = LoadSoundMem("../Sound/PlayBGM.mp3");
+
+	PlaySoundMem(PlayBGM, DX_PLAYTYPE_LOOP);
 
 	//ゲームモードによって表示する的の種類を変える
 	if (GameMode != 2) {//打っていい的だけ
@@ -31,7 +39,6 @@ void ShootDown::Init() {
 }
 
 void ShootDown::Play() {
-
 	Startlimit--;//スタートまでのカウントダウン
 
 	if (Startlimit <= 0) {
@@ -42,12 +49,14 @@ void ShootDown::Play() {
 		if (!IsFin) {
 			if (MarkType != 1) {
 				if (collision.IsClickOnRect(RectX,RectY, Height,Width)) {//指定のキーが押されるたびにカウントをプラス
+					PlaySoundMem(TrueSound, DX_PLAYTYPE_BACK);
 					IsHit = true;
 					CountPoint++;
 				}
 			}
 			else
 				if (collision.IsClickOnRect(RectX, RectY, Height, Width)) {//打っちゃいけない的の処理
+					PlaySoundMem(MissSound, DX_PLAYTYPE_BACK);
 					IsHit = true;
 					CountPoint--;
 				}
@@ -87,7 +96,9 @@ void ShootDown::Play() {
 	}
 
 	if (IsFin) {
+		DeleteSoundMem(PlayBGM);
 		if (collision.IsClickOnRect(SCREEN_SIZE_X - 150, SCREEN_SIZE_Y - 150, 150, 150)) {
+			PlaySoundMem(ClickSound, DX_PLAYTYPE_BACK);
 			g_CurrentSceneId = SCENE_ID_FIN_PLAY;
 		}
 	}
@@ -124,6 +135,9 @@ void ShootDown::Fin() {
 	DeleteGraph(AimHandle);
 	DeleteGraph(FinHandle);
 	DeleteGraph(NextHandle);
+
+	DeleteSoundMem(MissSound);
+	DeleteSoundMem(TrueSound);
 
 	MiniGameBase::Fin();
 	for (int i = 0; i < TargetMax; i++) {

@@ -10,6 +10,9 @@ void Select::Init() {
 	ArrowHandle[0] = LoadGraph("../Data/SelectScene/LeftArrow.png");
 	ArrowHandle[1] = LoadGraph("../Data/SelectScene/RightArrow.png");
 
+	ClickSound2 = LoadSoundMem("../Sound/Click2.mp3");
+	Scene::Init();
+	PlaySoundMem(GameBGM, DX_PLAYTYPE_LOOP);
 	number.Init(0,16,32);
 
 	// タイトルのループ処理へ遷移
@@ -20,16 +23,19 @@ void Select::Step() {
 
 	for (int i = 0; i < Lebel_Max_Num; i++) {
 		if (collision.IsClickOnRect((300 * i) + 100 * i + 90, SCREEN_SIZE_Y / 2 - 150, 300, 300)) {
-			g_CurrentSceneId = SCENE_ID_FIN_SELECT;
+			PlaySoundMem(ClickSound, DX_PLAYTYPE_BACK);
 			GameMode = i + 1;
+			g_CurrentSceneId = SCENE_ID_FIN_SELECT;
 		}
 	}
 
 	//出現速度変更
 	if (collision.IsClickOnRect(0, SCREEN_SIZE_Y - 64, 32, 64)) {
+		PlaySoundMem(ClickSound2, DX_PLAYTYPE_BACK);
 		LimitChange -= 5;
 	}
 	if (collision.IsClickOnRect(96, SCREEN_SIZE_Y - 64, 32, 64)) {
+		PlaySoundMem(ClickSound2, DX_PLAYTYPE_BACK);
 		LimitChange += 5;
 	}
 	if (LimitChange < 5) {
@@ -72,6 +78,7 @@ void Select::Fin()
 		DeleteGraph(ArrowHandle[i]);
 	}
 
+	Scene::Fin();
 	number.Fin();
 
 	// プレイシーンに遷移

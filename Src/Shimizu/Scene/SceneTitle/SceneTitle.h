@@ -1,7 +1,7 @@
 #pragma once
 #include "../../Scene/Scene.h"
 
-class Title{
+class Title : public Scene {
 private:
 	int Handle;			//”wŒi‰æ‘œ
 	int Click;			//ƒNƒŠƒbƒN‚µ‚Ä‚Ë‰æ‘œ

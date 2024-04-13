@@ -1,0 +1,9 @@
+効果音ラボ
+Click
+Click2
+Miss
+True
+
+魔王魂
+GameBGM
+PlayBGM

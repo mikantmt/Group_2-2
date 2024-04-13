@@ -5,6 +5,8 @@ void Result::Init() {
 	AimHandle = LoadGraph("../Data/PlayScene/Aiming.png");
 	NextHandle = LoadGraph("../Data/PlayScene/Finish/Next.png");
 
+	Scene::Init();
+	PlaySoundMem(GameBGM, DX_PLAYTYPE_LOOP);
 	number.Init(1, 64, 128);
 
 	// タイトルのループ処理へ遷移
@@ -20,6 +22,7 @@ void Result::Step() {
 	}
 
 	if (collision.IsClickOnRect(SCREEN_SIZE_X - 150, SCREEN_SIZE_Y - 150, 150, 150)) {
+		PlaySoundMem(ClickSound, DX_PLAYTYPE_BACK);
 		g_CurrentSceneId = SCENE_ID_FIN_RESULT;
 	}
 }
@@ -41,6 +44,8 @@ void Result::Fin()
 	DeleteGraph(Handle);
 	DeleteGraph(AimHandle);
 	DeleteGraph(NextHandle);
+
+	DeleteSoundMem(GameBGM);
 
 	number.Fin();
 	// プレイシーンに遷移

@@ -5,13 +5,15 @@
 
 const int  Lebel_Max_Num = 3;
 
-class Select {
+class Select : public Scene {
 private:
 	int LevelHandle[Lebel_Max_Num];	//難易度画像
 	int	AimHandle;		//エイムの画像ハンドル
 	int	MouseX, MouseY; //マウスの座標
 
 	int ArrowHandle[2];	//矢印のハンドル
+
+	int ClickSound2;
 
 public:
 	Collision collision;
