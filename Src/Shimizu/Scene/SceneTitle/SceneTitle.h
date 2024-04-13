@@ -3,7 +3,9 @@
 
 class Title{
 private:
-	int	  AimHandle;	//エイムの画像ハンドル
+	int Handle;			//背景画像
+	int Click;			//クリックしてね画像
+	int	AimHandle;		//エイムの画像ハンドル
 	int MouseX, MouseY; //マウスの座標
 public:
 	Collision collision;

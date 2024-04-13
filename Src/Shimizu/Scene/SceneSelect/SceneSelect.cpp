@@ -1,6 +1,10 @@
 #include "../../Scene/SceneSelect/SceneSelect.h"
 
 void Select::Init() {
+	LevelHandle[0] = LoadGraph("../Data/SelectScene/easy.png");
+	LevelHandle[1] = LoadGraph("../Data/SelectScene/normal.png");
+	LevelHandle[2] = LoadGraph("../Data/SelectScene/endless.png");
+
 	AimHandle = LoadGraph("../Data/PlayScene/Aiming.png");
 
 	ArrowHandle[0] = LoadGraph("../Data/SelectScene/LeftArrow.png");
@@ -14,27 +18,18 @@ void Select::Init() {
 
 void Select::Step() {
 
-	if (collision.IsClickOnRect(0, 0, 100, 100)) {
-		g_CurrentSceneId = SCENE_ID_FIN_SELECT;
-		GameMode = 1;
+	for (int i = 0; i < Lebel_Max_Num; i++) {
+		if (collision.IsClickOnRect((300 * i) + 100 * i + 90, SCREEN_SIZE_Y / 2 - 150, 300, 300)) {
+			g_CurrentSceneId = SCENE_ID_FIN_SELECT;
+			GameMode = i + 1;
+		}
 	}
-
-	if (collision.IsClickOnRect(100, 0, 100, 100)) {
-		g_CurrentSceneId = SCENE_ID_FIN_SELECT;
-		GameMode = 2;
-	}
-
-	if (collision.IsClickOnRect(200, 0, 100, 100)) {
-		g_CurrentSceneId = SCENE_ID_FIN_SELECT;
-		GameMode = 3;
-	}
-
 
 	//出現速度変更
-	if (collision.IsClickOnRect(SCREEN_SIZE_X - 132, SCREEN_SIZE_Y - 64, 32, 64)) {
+	if (collision.IsClickOnRect(0, SCREEN_SIZE_Y - 64, 32, 64)) {
 		LimitChange -= 5;
 	}
-	if (collision.IsClickOnRect(SCREEN_SIZE_X - 32, SCREEN_SIZE_Y - 64, 32, 64)) {
+	if (collision.IsClickOnRect(96, SCREEN_SIZE_Y - 64, 32, 64)) {
 		LimitChange += 5;
 	}
 	if (LimitChange < 5) {
@@ -46,24 +41,19 @@ void Select::Step() {
 	}
 
 	if (number.Digit_3 == 0) {//二桁の時の座標と
-		number.SetPos(SCREEN_SIZE_X - 64, SCREEN_SIZE_Y - 48);
+		number.SetPos(68, SCREEN_SIZE_Y - 48);
 	}
-	else					  //三桁の時の座標と
-		number.SetPos(SCREEN_SIZE_X - 56, SCREEN_SIZE_Y - 48);
+	else					  //三桁の時の座標
+		number.SetPos(76, SCREEN_SIZE_Y - 48);
 }
 
 void Select::Draw() {
-	DrawBox(0, 0, 100, 100, GetColor(255, 0, 0), true);
+	for (int i = 0; i < Lebel_Max_Num; i++) {
+		DrawGraph((300 * i) + 100 * i + 90, SCREEN_SIZE_Y / 2 - 150, LevelHandle[i], true);
+	}
 
-	DrawBox(100, 0, 200, 100, GetColor(0, 255, 0), true);
-
-	DrawBox(200, 0, 300, 100, GetColor(0, 0, 255), true);
-
-	DrawFormatString(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2, GetColor(255, 0, 0), "Select");
-
-
-	DrawGraph(SCREEN_SIZE_X - 132, SCREEN_SIZE_Y - 64, ArrowHandle[0], true);
-	DrawGraph(SCREEN_SIZE_X - 32, SCREEN_SIZE_Y - 64, ArrowHandle[1], true);
+	DrawGraph(0, SCREEN_SIZE_Y - 64, ArrowHandle[0], true);
+	DrawGraph(96, SCREEN_SIZE_Y - 64, ArrowHandle[1], true);
 
 	number.DrawFont(LimitChange);
 

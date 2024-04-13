@@ -16,6 +16,8 @@ private:
 	int	  RectX, RectY; //矩形の座標
 	int	  AimHandle;	//エイムの画像ハンドル
 	int   MarkHandle[TargetMax];	//的の画像ハンドル
+	int	  FinHandle;	//終了画像ハンドル
+	int   NextHandle;	//次へ画像ハンドル
 	float Limit;	    //表示されてからクリックするまでの猶予
 
 	int   MarkType;		//打っていい的と打っては駄目な的

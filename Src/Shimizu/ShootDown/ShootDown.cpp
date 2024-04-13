@@ -16,6 +16,9 @@ void ShootDown::Init() {
 	MarkHandle[0] = LoadGraph("../Data/PlayScene/target/good2.png");
 	MarkHandle[1] = LoadGraph("../Data/PlayScene/target/danger3.png");
 
+	FinHandle = LoadGraph("../Data/PlayScene/Finish/Finish.png");
+	NextHandle = LoadGraph("../Data/PlayScene/Finish/Next.png");
+
 	//ゲームモードによって表示する的の種類を変える
 	if (GameMode != 2) {//打っていい的だけ
 		MarkType = 2;
@@ -86,7 +89,7 @@ void ShootDown::Play() {
 	}
 
 	if (IsFin) {
-		if (collision.IsClickOnRect(0, 0, 100, 100)) {
+		if (collision.IsClickOnRect(SCREEN_SIZE_X - 150, SCREEN_SIZE_Y - 150, 150, 150)) {
 			g_CurrentSceneId = SCENE_ID_FIN_PLAY;
 		}
 	}
@@ -112,7 +115,8 @@ void ShootDown::Draw() {
 	DrawFormatString(0, 16, GetColor(0, 0, 0), "%d", count);
 
 	if (IsFin) {
-		DrawBox(0, 0, 100, 100, GetColor(255, 0, 0), true);
+		DrawGraph(SCREEN_SIZE_X / 2 - 150, SCREEN_SIZE_Y / 2 - 150, FinHandle, true);
+		DrawGraph(SCREEN_SIZE_X - 150, SCREEN_SIZE_Y - 150, NextHandle, true);
 	}
 
 	DrawFormatString(0, 200, GetColor(0, 0, 0), "%d", GameMode);

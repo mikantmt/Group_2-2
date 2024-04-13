@@ -4,6 +4,8 @@
 // タイトル初期化
 void Title::InitTitle()
 {
+	Handle = LoadGraph("../Data/TitleScene/AIMLAB.png");
+	Click = LoadGraph("../Data/TitleScene/Clicksta.png");
 	AimHandle = LoadGraph("../Data/PlayScene/Aiming.png");
 	// タイトルのループ処理へ遷移
 	g_CurrentSceneId = SCENE_ID_LOOP_TITLE;
@@ -27,7 +29,7 @@ void Title::StepTitle()
 	}
 
 
-	if (collision.IsClickOnRect(0,0,100,100)){//範囲内でクリックしたら
+	if (collision.IsClickOnRect(0,0, SCREEN_SIZE_X, SCREEN_SIZE_Y)){//範囲内でクリックしたら
 		g_CurrentSceneId = SCENE_ID_FIN_TITLE;
 	}
 }
@@ -35,12 +37,11 @@ void Title::StepTitle()
 // タイトル描画処理
 void Title::DrawTitle()
 {
+	DrawGraph(0, 0, Handle, true);
+
+	DrawGraph(SCREEN_SIZE_X / 2 - 150, SCREEN_SIZE_Y - 300, Click, true);
+
 	GetMousePoint(&MouseX, &MouseY);//マウスポイントの座標取得
-
-	DrawBox(0, 0, 100, 100, GetColor(255, 0, 0), true);
-
-	DrawFormatString(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2, GetColor(255, 0, 0), "タイトル");
-
 	//エイミングの画像
 	DrawRotaGraph(MouseX, MouseY, 1.0f, 0.0f, AimHandle, true);
 }

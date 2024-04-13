@@ -4,9 +4,9 @@
 
 class Play {
 private:
+	
 
 public:
-	/*ShootDown shootdown;*/
 
 	void Init();
 	void Step();
