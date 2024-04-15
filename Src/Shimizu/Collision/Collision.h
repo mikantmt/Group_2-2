@@ -6,6 +6,9 @@
 class Collision {
 private:
 	bool click_flag;
+
+	int x;
+	int y;
 public:
 	void Init();
 	void Play();

@@ -82,9 +82,6 @@ bool Collision::IsHitSphere(VECTOR Obj1, float radius1, VECTOR Obj2, float radiu
 }
 
 bool Collision::RectToMousePointa(float X,float Y,float W,float H) {
-	int x = 0;
-	int y = 0;
-
 	GetMousePoint(&x, &y);
 
 	if (X + W >= x && X <= x

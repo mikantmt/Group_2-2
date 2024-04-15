@@ -33,9 +33,6 @@ void ShootDown::Init() {
 	else if (GameMode == 2) {//‘Å‚Á‚Ä‚Í‚¢‚¯‚È‚¢“I‚à‚ ‚é
 		MarkType = ScopingRand(1, 5);
 	}
-
-	MouseX = 0;
-	MouseY = 0;
 }
 
 void ShootDown::Play() {
