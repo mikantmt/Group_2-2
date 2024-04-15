@@ -22,7 +22,7 @@ void Select::Init() {
 void Select::Step() {
 
 	for (int i = 0; i < Lebel_Max_Num; i++) {
-		if (collision.IsClickOnRect((300 * i) + 100 * i + 90, SCREEN_SIZE_Y / 2 - 150, 300, 300)) {
+		if (collision.IsClickOnRect((300 * i) + 100 * i + 90, SCREEN_SIZE_Y / 2 - 150, 300, 300, MouseX, MouseY)) {
 			PlaySoundMem(ClickSound, DX_PLAYTYPE_BACK);
 			GameMode = i + 1;
 			g_CurrentSceneId = SCENE_ID_FIN_SELECT;
@@ -30,11 +30,11 @@ void Select::Step() {
 	}
 
 	//oŒ»‘¬“x•ÏX
-	if (collision.IsClickOnRect(0, SCREEN_SIZE_Y - 64, 32, 64)) {
+	if (collision.IsClickOnRect(0, SCREEN_SIZE_Y - 64, 32, 64, MouseX, MouseY)) {
 		PlaySoundMem(ClickSound2, DX_PLAYTYPE_BACK);
 		LimitChange -= 5;
 	}
-	if (collision.IsClickOnRect(96, SCREEN_SIZE_Y - 64, 32, 64)) {
+	if (collision.IsClickOnRect(96, SCREEN_SIZE_Y - 64, 32, 64, MouseX, MouseY)) {
 		PlaySoundMem(ClickSound2, DX_PLAYTYPE_BACK);
 		LimitChange += 5;
 	}

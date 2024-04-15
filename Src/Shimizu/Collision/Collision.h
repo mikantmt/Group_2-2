@@ -29,10 +29,10 @@ public:
 
 	//矩形とマウスポインタの当たり判定
 	//引数(X座標,Y座標,幅,高さ)
-	bool RectToMousePointa(float X, float Y, float W, float H);
+	bool RectToMousePointa(float X, float Y, float W, float H,int MouseX,int MouseY);
 
 	//矩形とクリック当たり判定
-	bool IsClickOnRect(float X, float Y, float W, float H);
+	bool IsClickOnRect(float X, float Y, float W, float H, int mouseX, int mouseY);
 };
 
 #endif

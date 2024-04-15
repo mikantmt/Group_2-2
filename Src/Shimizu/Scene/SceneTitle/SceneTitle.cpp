@@ -34,7 +34,7 @@ void Title::StepTitle()
 	}
 
 
-	if (collision.IsClickOnRect(0,0, SCREEN_SIZE_X, SCREEN_SIZE_Y)){//範囲内でクリックしたら
+	if (collision.IsClickOnRect(0,0, SCREEN_SIZE_X, SCREEN_SIZE_Y, MouseX, MouseY)){//範囲内でクリックしたら
 		PlaySoundMem(ClickSound, DX_PLAYTYPE_BACK);
 		g_CurrentSceneId = SCENE_ID_FIN_TITLE;
 	}

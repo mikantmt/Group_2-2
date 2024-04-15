@@ -45,14 +45,14 @@ void ShootDown::Play() {
 		Limit++;	//リミットのカウント開始
 		if (!IsFin) {
 			if (MarkType != 1) {
-				if (collision.IsClickOnRect(RectX,RectY, Height,Width)) {//指定のキーが押されるたびにカウントをプラス
+				if (collision.IsClickOnRect(RectX,RectY, Height,Width, MouseX, MouseY)) {//指定のキーが押されるたびにカウントをプラス
 					PlaySoundMem(TrueSound, DX_PLAYTYPE_BACK);
 					IsHit = true;
 					CountPoint++;
 				}
 			}
 			else
-				if (collision.IsClickOnRect(RectX, RectY, Height, Width)) {//打っちゃいけない的の処理
+				if (collision.IsClickOnRect(RectX, RectY, Height, Width, MouseX, MouseY)) {//打っちゃいけない的の処理
 					PlaySoundMem(MissSound, DX_PLAYTYPE_BACK);
 					IsHit = true;
 					CountPoint--;
@@ -94,7 +94,7 @@ void ShootDown::Play() {
 
 	if (IsFin) {
 		DeleteSoundMem(PlayBGM);
-		if (collision.IsClickOnRect(SCREEN_SIZE_X - 150, SCREEN_SIZE_Y - 150, 150, 150)) {
+		if (collision.IsClickOnRect(SCREEN_SIZE_X - 150, SCREEN_SIZE_Y - 150, 150, 150, MouseX, MouseY)) {
 			PlaySoundMem(ClickSound, DX_PLAYTYPE_BACK);
 			g_CurrentSceneId = SCENE_ID_FIN_PLAY;
 		}

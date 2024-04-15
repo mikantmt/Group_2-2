@@ -81,22 +81,21 @@ bool Collision::IsHitSphere(VECTOR Obj1, float radius1, VECTOR Obj2, float radiu
 	return false;
 }
 
-bool Collision::RectToMousePointa(float X,float Y,float W,float H) {
-	GetMousePoint(&x, &y);
+bool Collision::RectToMousePointa(float X,float Y,float W,float H, int mouseX, int mouseY) {
 
-	if (X + W >= x && X <= x
-		&& Y + H >= y && Y <= y) {
+	if (X + W >= mouseX && X <= mouseX
+		&& Y + H >= mouseY && Y <= mouseY) {
 		return true;
 	}
 	else
 		return false;
 }
 
-bool Collision::IsClickOnRect(float X, float Y, float W, float H)
+bool Collision::IsClickOnRect(float X, float Y, float W, float H, int mouseX, int mouseY)
 {
 	//‹éŒ`‚Ì’†‚É‚ ‚é
 
-	if (RectToMousePointa(X,Y,W,H)) {
+	if (RectToMousePointa(X,Y,W,H, mouseX, mouseY)) {
 		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)
 		{
 			//‰Ÿ‚³‚ê‚Ä‚¢‚é

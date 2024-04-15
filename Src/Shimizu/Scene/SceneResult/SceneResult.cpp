@@ -21,7 +21,7 @@ void Result::Step() {
 		CountPoint = 999;
 	}
 
-	if (collision.IsClickOnRect(SCREEN_SIZE_X - 150, SCREEN_SIZE_Y - 150, 150, 150)) {
+	if (collision.IsClickOnRect(SCREEN_SIZE_X - 150, SCREEN_SIZE_Y - 150, 150, 150, MouseX, MouseY)) {
 		PlaySoundMem(ClickSound, DX_PLAYTYPE_BACK);
 		g_CurrentSceneId = SCENE_ID_FIN_RESULT;
 	}
