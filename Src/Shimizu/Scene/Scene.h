@@ -51,3 +51,5 @@ extern int GameMode;
 extern int LimitChange;
 //得点保存用
 extern int CountPoint;
+//マウス感度用
+extern float MouseSens;

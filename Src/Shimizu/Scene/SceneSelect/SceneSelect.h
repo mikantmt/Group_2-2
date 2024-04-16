@@ -4,6 +4,8 @@
 #include "../../Number/Number.h"
 
 const int  Lebel_Max_Num = 3;
+const int  Arrow_Max_Num = 6;
+
 
 class Select : public Scene {
 private:
@@ -11,7 +13,7 @@ private:
 	int	AimHandle;		//エイムの画像ハンドル
 	int	MouseX, MouseY; //マウスの座標
 
-	int ArrowHandle[2];	//矢印のハンドル
+	int ArrowHandle[Arrow_Max_Num];	//矢印のハンドル
 
 	int ClickSound2;
 

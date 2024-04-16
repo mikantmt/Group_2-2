@@ -28,6 +28,10 @@ private:
 	int PlayBGM;
 
 	int	MouseX, MouseY; //マウスの座標
+
+	int NextMouseX, NextMouseY;
+
+	int diffX, diffY;
 public:
 	Collision collision;
 	Scene scene;

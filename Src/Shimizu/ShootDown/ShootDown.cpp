@@ -10,6 +10,8 @@ void ShootDown::Init() {
 	RectX = ScopingRand(0, SCREEN_SIZE_X - Width);
 	RectY = ScopingRand(0, SCREEN_SIZE_Y - Height);
 	Limit = 0.0f;
+	MouseX = SCREEN_SIZE_X / 2;
+	MouseY = SCREEN_SIZE_Y / 2;
 
 	//画像読込
 	AimHandle = LoadGraph("../Data/PlayScene/Aiming.png");
@@ -99,12 +101,20 @@ void ShootDown::Play() {
 			g_CurrentSceneId = SCENE_ID_FIN_PLAY;
 		}
 	}
+
+	GetMousePoint(&NextMouseX, &NextMouseY);//マウスポイントの座標取得
+
+	diffX = NextMouseX - SCREEN_SIZE_X / 2;
+	diffY = NextMouseY - SCREEN_SIZE_Y / 2;
+
+	SetMousePoint(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2);
+
+	MouseX += diffX * MouseSens;
+	MouseY += diffY * MouseSens;
 }
 
 void ShootDown::Draw() {
 	CountDown(Startlimit);//カウントダウン表示
-
-	GetMousePoint(&MouseX, &MouseY);//マウスポイントの座標取得
 
 	if (Startlimit <= 0 && time >= 0.0f) {
 		//ターゲット表示

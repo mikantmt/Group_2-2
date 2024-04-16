@@ -9,16 +9,16 @@ void Number::SetPos(int num1, int num2) {
 	numberY = num2;
 }
 
-void Number::DrawFont(int number,int Xsize) {
+void Number::DrawFont(int number, int Xsize) {
 
 	Digit_1 = number % 10;//ˆêŒ…–Ú
 
 
 	Digit_2 = number / 10 % 10;//“ñŒ…–Ú
 	Digit_3 = number / 100;	   //OŒ…–Ú
-	
+
 	DrawGraph(numberX, numberY, handle[Digit_1], true);
-	
+
 	DrawGraph(numberX - Xsize, numberY, handle[Digit_2], true);
 
 	if (Digit_3 != 0) {

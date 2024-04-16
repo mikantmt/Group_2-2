@@ -15,7 +15,7 @@ SCENE_ID g_CurrentSceneId = SCENE_ID_INIT_TITLE;
 int GameMode = 0;
 int LimitChange = 60;
 int CountPoint = 0;
-
+float MouseSens = 1.0f;
 
 // Win32アプリケーションは WinMain関数 から始まる
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
